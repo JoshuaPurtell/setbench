@@ -1,0 +1,7 @@
+[engine_core]
+repo = "JoshuaPurtell/setbench-engine-core"
+commit = "9d2a9f33c48ec155b626e8858d330e72e73b17fb"
+
+[policy]
+tb3_must_pin_commit = true
+tb3_must_not_import_setbench_full = true
