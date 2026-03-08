@@ -7,6 +7,13 @@ This directory is the source-of-truth benchmark family for Crystal Guardians.
 - `source/`: canonical benchmark assets.
 - `variants/`: partial-gold curriculum tiers derived from the canonical source.
 
+This family also respects the repo-level split:
+
+- `setbench-engine-core` supplies pinned shared engine code
+- `setbench-full/crystal_guardians/source` owns the benchmark source of truth
+- `setbench-full/crystal_guardians/variants` owns derived disclosure tiers
+- `terminal-bench-3` should only receive one exported packaged variant
+
 ## Canonical source assets
 
 The canonical source contains:
