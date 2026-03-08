@@ -461,12 +461,14 @@ def suite_config(family: FamilySpec, suite: str) -> dict[str, object]:
             "eval_runtime": family.hidden_runtime,
             "scenario_fixture": family.hidden_scenarios,
             "gold_fixture": Path(".hidden/generated_gold.json"),
+            "test_filter": "setbench_eval_suite",
         }
     if suite == "train":
         return {
             "eval_runtime": family.train_runtime,
             "scenario_fixture": family.train_scenarios,
             "gold_fixture": Path("train/generated_train_gold.json"),
+            "test_filter": "setbench_train_suite",
         }
     raise RuntimeError(f"unsupported suite: {suite}")
 
@@ -492,6 +494,7 @@ def run_suite(
     scenario_fixture = suite_data["scenario_fixture"]
     eval_runtime = suite_data["eval_runtime"]
     gold_fixture_rel = suite_data["gold_fixture"]
+    test_filter = suite_data["test_filter"]
     expected_games = scenario_fixture.read_text().count('"name"')
     candidate_paths = select_subject_paths(family, subject, variant)
     todo_hits = static_todo_hits(list(candidate_paths.values()))
@@ -571,7 +574,7 @@ def run_suite(
                 "test",
                 "--package",
                 "tcg_expansions",
-                "setbench_eval_suite",
+                str(test_filter),
                 "--",
                 "--test-threads=1",
                 "--nocapture",
