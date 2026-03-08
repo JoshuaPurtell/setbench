@@ -1,11 +1,10 @@
 [family]
 name = "dragon_frontiers"
-description = "Dragon Frontiers benchmark family scaffold."
+description = "Dragon Frontiers attack-slice benchmark family."
 engine_module = "df"
 task_name = "setbench-v1-dragon-frontiers"
 eval_host_file = "cards"
-readiness = "blocked"
-readiness_reason = "Dragon Frontiers gold files are present, but scenario fixtures and eval runners are not implemented yet."
+readiness = "ready"
 
 [engine_core]
 commit = "9d2a9f33c48ec155b626e8858d330e72e73b17fb"
@@ -73,8 +72,4 @@ stubbed_functions = [
   "attack_overrides",
   "attack_blocked_by_shining_horn",
   "post_attack",
-  "between_turns",
-  "execute_power",
-  "register_triggers",
-  "resolve_custom_prompt",
 ]

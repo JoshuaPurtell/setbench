@@ -7,7 +7,7 @@ description = "Approximate 80 percent disclosure by public function count."
 commit = "9d2a9f33c48ec155b626e8858d330e72e73b17fb"
 
 [disclosure]
-revealed_public_functions = 14
+revealed_public_functions = 18
 total_public_functions = 21
 
 [disclosure.per_file.cards]
@@ -19,15 +19,11 @@ stubbed_functions = []
 
 [disclosure.per_file.engine]
 source = "gold"
-revealed = 11
+revealed = 15
 total = 18
 keep_gold_functions = []
 stubbed_functions = [
   "attack_overrides",
   "attack_blocked_by_shining_horn",
   "post_attack",
-  "between_turns",
-  "execute_power",
-  "register_triggers",
-  "resolve_custom_prompt",
 ]

@@ -1,3 +1,72 @@
 {
-  "scenarios": []
+  "scenarios": [
+    {
+      "name": "extra_claws_vs_ex",
+      "seed": 701,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-3",
+        "energy": "ENERGY-FIGHTING",
+        "extras": ["DF-95"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-3",
+        "energy": "ENERGY-FIGHTING",
+        "extras": ["DF-95"]
+      },
+      "required_markers": ["Extra Claws", ",20)"]
+    },
+    {
+      "name": "vengeance_three_in_discard",
+      "seed": 702,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-7",
+        "energy": "ENERGY-GRASS",
+        "extras": ["DF-43"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-7",
+        "energy": "ENERGY-GRASS",
+        "extras": ["DF-43"]
+      },
+      "required_markers": ["Vengeance", ",30)"]
+    },
+    {
+      "name": "surge_with_two_water",
+      "seed": 703,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-15",
+        "energy": "ENERGY-WATER",
+        "extras": ["DF-43"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-15",
+        "energy": "ENERGY-WATER",
+        "extras": ["DF-43"]
+      },
+      "required_markers": ["Surge", ",20)"]
+    },
+    {
+      "name": "psychic_boom_three_energy",
+      "seed": 704,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-60",
+        "energy": "ENERGY-PSYCHIC",
+        "extras": ["DF-43"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-60",
+        "energy": "ENERGY-PSYCHIC",
+        "extras": ["DF-43"]
+      },
+      "required_markers": ["Psychic Boom", ",30)"]
+    }
+  ]
 }
