@@ -18,6 +18,7 @@ ENGINE_CORE_REPO = ROOT.parent / "setbench-engine-core"
 FAMILY = ROOT / "crystal_guardians"
 SOURCE = FAMILY / "source"
 VARIANTS = FAMILY / "variants"
+TARGET_ROOT = ROOT / ".cache" / "cargo-target"
 
 
 def run(cmd: list[str], *, cwd: Path | None = None, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
@@ -157,6 +158,7 @@ def run_hidden_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str)
     install_eval_source(all_cards_path, gold_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(gold_cg_engine, cg_engine_path)
     env = os.environ.copy()
+    env["CARGO_TARGET_DIR"] = str(TARGET_ROOT / f"cg-hidden-{variant}-{subject}")
     env["SETBENCH_GOLD_OUTPUT"] = str(gold_fixture)
     gold = run(
         [
@@ -182,7 +184,9 @@ def run_hidden_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str)
     install_eval_source(all_cards_path, candidate_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(candidate_cg_engine, cg_engine_path)
 
-    compile_proc = run(["cargo", "check", "--package", "tcg_expansions"], cwd=app_dir, env=os.environ.copy())
+    compile_env = os.environ.copy()
+    compile_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
+    compile_proc = run(["cargo", "check", "--package", "tcg_expansions"], cwd=app_dir, env=compile_env)
     result["compile_stdout"] = compile_proc.stdout
     result["compile_stderr"] = compile_proc.stderr
     if compile_proc.returncode != 0:
@@ -190,6 +194,7 @@ def run_hidden_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str)
     result["compile_ok"] = 1
 
     eval_env = os.environ.copy()
+    eval_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
     eval_env["SETBENCH_GOLD_PATH"] = str(gold_fixture)
     suite_proc = run(
         [
@@ -245,6 +250,7 @@ def run_train_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str) 
     install_eval_source(all_cards_path, gold_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(gold_cg_engine, cg_engine_path)
     env = os.environ.copy()
+    env["CARGO_TARGET_DIR"] = str(TARGET_ROOT / f"cg-train-{variant}-{subject}")
     env["SETBENCH_GOLD_OUTPUT"] = str(gold_fixture)
     gold = run(
         [
@@ -270,7 +276,9 @@ def run_train_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str) 
     install_eval_source(all_cards_path, candidate_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(candidate_cg_engine, cg_engine_path)
 
-    compile_proc = run(["cargo", "check", "--package", "tcg_expansions"], cwd=app_dir)
+    compile_env = os.environ.copy()
+    compile_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
+    compile_proc = run(["cargo", "check", "--package", "tcg_expansions"], cwd=app_dir, env=compile_env)
     result["compile_stdout"] = compile_proc.stdout
     result["compile_stderr"] = compile_proc.stderr
     if compile_proc.returncode != 0:
@@ -278,6 +286,7 @@ def run_train_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str) 
     result["compile_ok"] = 1
 
     eval_env = os.environ.copy()
+    eval_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
     eval_env["SETBENCH_GOLD_PATH"] = str(gold_fixture)
     suite_proc = run(
         [
@@ -315,6 +324,7 @@ def main() -> int:
     temp_dir_obj = tempfile.TemporaryDirectory(prefix="setbench-full-cg-")
     temp_root = Path(temp_dir_obj.name)
     try:
+        TARGET_ROOT.mkdir(parents=True, exist_ok=True)
         app_dir, tests_dir = build_workspace(temp_root)
         if args.suite == "hidden":
             result = run_hidden_suite(app_dir, tests_dir, args.variant, args.subject)
