@@ -853,9 +853,20 @@ use tcg_rules_ex::SpecialCondition;
 
 pub fn attack_overrides(
     _game: &GameState,
+    _attack: &Attack,
+    _attacker_id: CardInstanceId,
+    _defender_id: CardInstanceId,
+) -> AttackOverrides {
+    AttackOverrides::default()
+}
 
 pub fn post_attack(
     _game: &mut GameState,
+    _attacker_id: CardInstanceId,
+    _defender_id: CardInstanceId,
+    _damage_dealt: u16,
+) {
+}
 
 pub fn between_turns(game: &mut GameState) {
     let mut extra_damage = Vec::new();
@@ -1213,6 +1224,13 @@ pub fn register_triggers(game: &mut GameState, slot: &PokemonSlot) {
 
 pub fn resolve_custom_prompt(
     _game: &mut GameState,
+    _effect_id: &str,
+    _source_id: Option<CardInstanceId>,
+    _target_ids: &[CardInstanceId],
+) -> bool {
+    // SETBENCH_TODO: implement Crystal Guardians prompt resolvers.
+    false
+}
 
 fn execute_hydro_shot(game: &mut GameState, source_id: CardInstanceId) -> bool {
     // Kyogre ex (CG-95) — Hydro Shot:

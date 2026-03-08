@@ -1,4 +1,4 @@
-# SetBench Full
+# SetBench
 
 Internal source-of-truth repo for full SetBench benchmark families and partial-gold curricula.
 
@@ -7,12 +7,12 @@ This repo exists to keep benchmark-generation assets separate from both the shar
 ## Boundary
 
 - `setbench-engine-core` owns reusable engine/runtime/scaffold code.
-- `setbench-full` owns benchmark families, gold/stub pairs, train/held-out fixtures, and partial-gold curricula such as `0pct`, `30pct`, and `80pct`.
+- `setbench` owns benchmark families, gold/stub pairs, train/held-out fixtures, and partial-gold curricula such as `0pct`, `30pct`, and `80pct`.
 - `terminal-bench-3` owns only exported packaged tasks.
 
 `terminal-bench-3` must never import this repo directly.
 
-If a TB3 task needs shared engine code, it must pin an exact `setbench-engine-core` commit. It must not pull `setbench-full`, and it must not transitively depend on any `setbench-full` layout.
+If a TB3 task needs shared engine code, it must pin an exact `setbench-engine-core` commit. It must not pull `setbench`, and it must not transitively depend on any `setbench` layout.
 
 ## Split
 
@@ -21,7 +21,7 @@ There are two different splits that matter in this repo.
 1. Repo split
 
 - `setbench-engine-core`: shared engine and scaffold only
-- `setbench-full`: benchmark family source material and curriculum variants
+- `setbench`: benchmark family source material and curriculum variants
 - `terminal-bench-3`: exported benchmark task packages only
 
 2. Within each benchmark family
@@ -43,17 +43,17 @@ The intended workflow is:
 
 ## Local execution
 
-The repo includes a local Crystal Guardians runner:
+The repo includes manifest-driven local runners:
 
 ```bash
 cd /Users/joshpurtell/Documents/GitHub/setbench-full
-./scripts/run_crystal_guardians.py --variant 0pct --subject gold --suite hidden
+./scripts/run_family.py --family crystal_guardians --variant 0pct --subject gold --suite hidden
 ```
 
 That runner:
 
 1. archives the pinned `setbench-engine-core` commit into a temporary workspace
-2. overlays the chosen Crystal Guardians variant
+2. overlays the chosen family variant
 3. generates event-log gold from the two gold files at runtime
 4. runs the requested suite against the staged workspace
 
@@ -67,3 +67,9 @@ The long-term flow is:
 4. Copy only the packaged artifact into `terminal-bench-3`.
 
 The packaged TB3 task should stay narrowly scoped, cleanly additive, and benchmark-only.
+
+## Family status
+
+- `crystal_guardians`: ready and validated through the local runner.
+- `dragon_frontiers`: scaffolded with engine-core gold files and a curriculum manifest, but still blocked on fixtures and eval runners.
+- `holon_phantoms`: scaffolded structurally, but blocked on a real reference implementation beyond the current engine-core placeholders.

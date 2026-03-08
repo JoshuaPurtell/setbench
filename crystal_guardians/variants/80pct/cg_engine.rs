@@ -33,6 +33,11 @@ pub fn discard_double_rainbow_if_basic(slot: &mut PokemonSlot) -> Vec<CardInstan
 
 pub fn prevents_attack_effects(
     _game: &GameState,
+    _attacker_id: CardInstanceId,
+    _defender_id: CardInstanceId,
+) -> bool {
+    false
+}
 
 pub fn tool_discard_timing_override(def_id: &CardDefId) -> Option<&'static str> {
     if def_id_matches(def_id, "CG", 80) {

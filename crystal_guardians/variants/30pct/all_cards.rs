@@ -853,9 +853,20 @@ use tcg_rules_ex::SpecialCondition;
 
 pub fn attack_overrides(
     _game: &GameState,
+    _attack: &Attack,
+    _attacker_id: CardInstanceId,
+    _defender_id: CardInstanceId,
+) -> AttackOverrides {
+    AttackOverrides::default()
+}
 
 pub fn post_attack(
     _game: &mut GameState,
+    _attacker_id: CardInstanceId,
+    _defender_id: CardInstanceId,
+    _damage_dealt: u16,
+) {
+}
 
 pub fn between_turns(_game: &mut GameState) {}
 
@@ -909,6 +920,12 @@ pub fn apply_tool_stadium_effects(_game: &mut GameState) {}
 
 pub fn can_attach_tool(
     _game: &GameState,
+    _player: PlayerId,
+    _tool_id: CardInstanceId,
+    _target_id: CardInstanceId,
+) -> bool {
+    true
+}
 
 pub fn on_tool_attached(_game: &mut GameState, _tool_id: CardInstanceId, _target_id: CardInstanceId) {}
 
@@ -918,6 +935,11 @@ pub fn energy_provides_override(_game: &GameState, _card: &CardInstance) -> Opti
 
 pub fn on_energy_attached(
     _game: &mut GameState,
+    _energy_id: CardInstanceId,
+    _target_id: CardInstanceId,
+    _source: EnergyAttachmentSource,
+) {
+}
 
 fn chlorophyll_applies(game: &GameState, energy_id: CardInstanceId, provides: &[Type]) -> bool {
     if provides.is_empty() || provides.iter().any(|type_| *type_ != Type::Colorless) {
@@ -980,14 +1002,31 @@ pub fn after_attack(_game: &mut GameState, _attacker_id: CardInstanceId, _defend
 
 pub fn can_use_pokepower_override(
     _game: &GameState,
+    _player: PlayerId,
+    _pokemon_id: CardInstanceId,
+) -> Option<bool> {
+    None
+}
 
 pub fn is_pokebody_active_override(
     _game: &GameState,
+    _player: PlayerId,
+    _pokemon_id: CardInstanceId,
+) -> Option<bool> {
+    None
+}
 
 pub fn register_triggers(_game: &mut GameState, _slot: &PokemonSlot) {}
 
 pub fn resolve_custom_prompt(
     _game: &mut GameState,
+    _effect_id: &str,
+    _source_id: Option<CardInstanceId>,
+    _target_ids: &[CardInstanceId],
+) -> bool {
+    // SETBENCH_TODO: implement Crystal Guardians prompt resolvers.
+    false
+}
 
 fn execute_hydro_shot(game: &mut GameState, source_id: CardInstanceId) -> bool {
     // Kyogre ex (CG-95) — Hydro Shot:

@@ -10,8 +10,8 @@ This directory is the source-of-truth benchmark family for Crystal Guardians.
 This family also respects the repo-level split:
 
 - `setbench-engine-core` supplies pinned shared engine code
-- `setbench-full/crystal_guardians/source` owns the benchmark source of truth
-- `setbench-full/crystal_guardians/variants` owns derived disclosure tiers
+- `setbench/crystal_guardians/source` owns the benchmark source of truth
+- `setbench/crystal_guardians/variants` owns derived disclosure tiers
 - `terminal-bench-3` should only receive one exported packaged variant
 
 ## Canonical source assets
@@ -23,6 +23,7 @@ The canonical source contains:
 - the two gold files
 - the two agent-implemented stub files
 - task metadata used by exported tasks
+- `family.toml`, which defines the graded files, runner paths, and disclosure rules
 
 ## Variant semantics
 

@@ -9,14 +9,12 @@ Dragon Frontiers is the next clean candidate for a SetBench family because the r
 - `scaffold/src/df/helpers.rs`
 - `scaffold/src/df/mod.rs`
 
-## What a DF benchmark family still needs
+## Current status in setbench
 
-- a gold/stub split for the graded files
-- public train scenarios and a visible runner
-- hidden held-out scenarios and a hidden runner
-- task-level instructions and export metadata
-- a curriculum policy for `0pct`, `30pct`, and `80pct`
+- gold files are copied into `dragon_frontiers/source/gold`
+- a matching stub surface and curriculum manifest exist in `dragon_frontiers`
+- the family is still blocked on public train fixtures, hidden held-out fixtures, and eval runners
 
 ## Practical implication
 
-Dragon Frontiers should be materially easier to stand up than a brand new set because the shared engine repo already has a mature reference implementation. The main work is benchmark extraction, scenario design, and curriculum slicing, not engine invention.
+Dragon Frontiers should be materially easier to stand up than a brand new set because the shared engine repo already has a mature reference implementation. The remaining work is benchmark extraction, scenario design, and curriculum slicing, not engine invention.
