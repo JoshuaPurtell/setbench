@@ -32,6 +32,15 @@ def run(cmd: list[str], *, cwd: Path | None = None, env: dict[str, str] | None =
     )
 
 
+def cargo_env(target_dir: Path) -> dict[str, str]:
+    env = os.environ.copy()
+    env["CARGO_TARGET_DIR"] = str(target_dir)
+    env["CARGO_INCREMENTAL"] = "0"
+    env["RUSTFLAGS"] = env.get("RUSTFLAGS", "").strip()
+    env["RUSTFLAGS"] = (env["RUSTFLAGS"] + " -C debuginfo=0").strip()
+    return env
+
+
 def read_engine_pin() -> str:
     pin_path = ROOT / "engine_core_pin.toml"
     text = pin_path.read_text()
@@ -157,8 +166,7 @@ def run_hidden_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str)
 
     install_eval_source(all_cards_path, gold_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(gold_cg_engine, cg_engine_path)
-    env = os.environ.copy()
-    env["CARGO_TARGET_DIR"] = str(TARGET_ROOT / f"cg-hidden-{variant}-{subject}")
+    env = cargo_env(TARGET_ROOT / f"cg-hidden-{variant}-{subject}")
     env["SETBENCH_GOLD_OUTPUT"] = str(gold_fixture)
     gold = run(
         [
@@ -184,8 +192,7 @@ def run_hidden_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str)
     install_eval_source(all_cards_path, candidate_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(candidate_cg_engine, cg_engine_path)
 
-    compile_env = os.environ.copy()
-    compile_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
+    compile_env = cargo_env(Path(env["CARGO_TARGET_DIR"]))
     compile_proc = run(["cargo", "check", "--package", "tcg_expansions"], cwd=app_dir, env=compile_env)
     result["compile_stdout"] = compile_proc.stdout
     result["compile_stderr"] = compile_proc.stderr
@@ -193,8 +200,7 @@ def run_hidden_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str)
         return result
     result["compile_ok"] = 1
 
-    eval_env = os.environ.copy()
-    eval_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
+    eval_env = cargo_env(Path(env["CARGO_TARGET_DIR"]))
     eval_env["SETBENCH_GOLD_PATH"] = str(gold_fixture)
     suite_proc = run(
         [
@@ -249,8 +255,7 @@ def run_train_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str) 
 
     install_eval_source(all_cards_path, gold_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(gold_cg_engine, cg_engine_path)
-    env = os.environ.copy()
-    env["CARGO_TARGET_DIR"] = str(TARGET_ROOT / f"cg-train-{variant}-{subject}")
+    env = cargo_env(TARGET_ROOT / f"cg-train-{variant}-{subject}")
     env["SETBENCH_GOLD_OUTPUT"] = str(gold_fixture)
     gold = run(
         [
@@ -276,8 +281,7 @@ def run_train_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str) 
     install_eval_source(all_cards_path, candidate_all_cards, eval_runtime, app_dir, tests_dir)
     shutil.copy2(candidate_cg_engine, cg_engine_path)
 
-    compile_env = os.environ.copy()
-    compile_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
+    compile_env = cargo_env(Path(env["CARGO_TARGET_DIR"]))
     compile_proc = run(["cargo", "check", "--package", "tcg_expansions"], cwd=app_dir, env=compile_env)
     result["compile_stdout"] = compile_proc.stdout
     result["compile_stderr"] = compile_proc.stderr
@@ -285,8 +289,7 @@ def run_train_suite(app_dir: Path, tests_dir: Path, variant: str, subject: str) 
         return result
     result["compile_ok"] = 1
 
-    eval_env = os.environ.copy()
-    eval_env["CARGO_TARGET_DIR"] = env["CARGO_TARGET_DIR"]
+    eval_env = cargo_env(Path(env["CARGO_TARGET_DIR"]))
     eval_env["SETBENCH_GOLD_PATH"] = str(gold_fixture)
     suite_proc = run(
         [
