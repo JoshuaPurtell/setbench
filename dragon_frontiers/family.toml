@@ -1,6 +1,6 @@
 [family]
 name = "dragon_frontiers"
-description = "Dragon Frontiers attack-slice benchmark family."
+description = "Dragon Frontiers benchmark family with attack-focused public train and broad hidden import/runtime coverage."
 engine_module = "df"
 task_name = "setbench-v1-dragon-frontiers"
 eval_host_file = "cards"

@@ -9,13 +9,23 @@ Dragon Frontiers now has:
 - gold files copied from `setbench-engine-core`
 - a matching stub surface
 - a curriculum manifest for `0pct`, `30pct`, and `80pct`
-- a first runnable attack-centric train and hidden eval slice
+- an attack-focused public train slice
+- broad hidden import-spec and runtime-hook coverage on top of the hidden event-log eval
 
-This first slice focuses on deterministic attack/event-log behavior for a small set of
-DF attacks whose semantics live in `import_specs.rs` and `runtime.rs`.
+The public train surface is still intentionally narrower than the hidden suite. It focuses
+on deterministic attack/event-log behavior for a small set of DF attacks whose semantics
+live in `import_specs.rs` and `runtime.rs`.
 
-It is not complete set coverage yet. The next expansion work is:
+The hidden suite now also checks:
 
-- broaden the visible and held-out scenario sets
-- add power/body-heavy scenarios on top of the attack slice
+- full attack import-spec coverage
+- full power/body import-spec coverage
+- trainer effect coverage
+- runtime hook coverage for attack modifiers, Shining Horn gating, energy overrides,
+  energy-attachment hooks, between-turn effects, power locks, and trigger registration
+
+Remaining expansion work is:
+
+- broaden the visible train scenarios beyond the current attack-focused slice
+- add more dynamic power/trainer event-log scenarios, not just hook/unit coverage
 - tighten eventual export packaging for Terminal Bench
