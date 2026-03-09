@@ -13,8 +13,10 @@ Dragon Frontiers is the next clean candidate for a SetBench family because the r
 
 - gold files are copied into `dragon_frontiers/source/gold`
 - a matching stub surface and curriculum manifest exist in `dragon_frontiers`
-- the family is still blocked on public train fixtures, hidden held-out fixtures, and eval runners
+- public train and hidden held-out replay runners are implemented
+- public and hidden replay surfaces are aligned
+- hidden eval additionally checks import-spec completeness and direct runtime hooks
 
 ## Practical implication
 
-Dragon Frontiers should be materially easier to stand up than a brand new set because the shared engine repo already has a mature reference implementation. The remaining work is benchmark extraction, scenario design, and curriculum slicing, not engine invention.
+Dragon Frontiers is now a real benchmark family because the shared engine repo already has a mature reference implementation. Remaining work is depth and export polish, not basic family bring-up.

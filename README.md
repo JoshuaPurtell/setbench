@@ -37,9 +37,11 @@ The intended workflow is:
 
 ## Current contents
 
-- `crystal_guardians/`: benchmark family source and curriculum variants.
+- `crystal_guardians/`: validated benchmark family source and curriculum variants.
+- `dragon_frontiers/`: validated benchmark family source and curriculum variants.
+- `holon_phantoms/`: blocked family scaffold that mirrors the current engine-core placeholder.
 - `roadmap/`: scoping notes for future benchmark families.
-- `scripts/`: local materializers for deriving task variants from the benchmark source.
+- `scripts/`: manifest-driven local materializers and runners.
 
 ## Local execution
 
@@ -71,5 +73,5 @@ The packaged TB3 task should stay narrowly scoped, cleanly additive, and benchma
 ## Family status
 
 - `crystal_guardians`: ready and validated through the local runner.
-- `dragon_frontiers`: scaffolded with engine-core gold files and a curriculum manifest, but still blocked on fixtures and eval runners.
-- `holon_phantoms`: scaffolded structurally, but blocked on a real reference implementation beyond the current engine-core placeholders.
+- `dragon_frontiers`: ready and validated through the local runner, with aligned public and hidden replay surfaces plus hidden import/runtime coverage.
+- `holon_phantoms`: scaffolded structurally, but blocked on a real reference implementation in `setbench-engine-core`.
