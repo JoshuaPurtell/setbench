@@ -59,6 +59,17 @@ That runner:
 3. generates event-log gold from the two gold files at runtime
 4. runs the requested suite against the staged workspace
 
+To export a family variant into a Terminal Bench 3 task bundle under `.exports/`:
+
+```bash
+cd /Users/joshpurtell/Documents/GitHub/setbench-full
+python3 ./scripts/export_tb3_task.py --family dragon_frontiers --variant 0pct
+```
+
+The exporter emits a standalone task tree under:
+
+- `.exports/terminal-bench-3/tasks/<task-name>/`
+
 ## Export intent
 
 The long-term flow is:

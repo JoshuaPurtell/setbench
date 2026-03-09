@@ -28,3 +28,17 @@ Remaining expansion work is:
 
 - add more dynamic power/trainer event-log scenarios, not just hook/unit coverage
 - tighten eventual export packaging for Terminal Bench
+
+## Export status
+
+Dragon Frontiers can now be exported into a standalone Terminal Bench 3 task bundle
+via:
+
+```bash
+cd /Users/joshpurtell/Documents/GitHub/setbench-full
+python3 ./scripts/export_tb3_task.py --family dragon_frontiers --variant 0pct
+```
+
+The exported bundle lands under:
+
+- `.exports/terminal-bench-3/tasks/setbench-v1-dragon-frontiers/`
