@@ -135,6 +135,57 @@
         "extras": ["DF-43"]
       },
       "required_markers": ["Splash About", ",10)"]
+    },
+    {
+      "name": "buffer_piece_attach",
+      "seed": 709,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-43",
+        "energy": "ENERGY-WATER",
+        "extras": ["DF-72"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-43",
+        "energy": "ENERGY-WATER",
+        "extras": ["DF-72"]
+      },
+      "required_markers": ["ToolAttached("]
+    },
+    {
+      "name": "holon_legacy_play",
+      "seed": 710,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-1",
+        "energy": "ENERGY-LIGHTNING",
+        "extras": ["DF-74", "DF-43"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-43",
+        "energy": "ENERGY-WATER",
+        "extras": ["DF-74", "DF-43"]
+      },
+      "required_markers": ["StadiumPlayed("]
+    },
+    {
+      "name": "strength_charm_attach",
+      "seed": 711,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-3",
+        "energy": "ENERGY-FIGHTING",
+        "extras": ["DF-81", "DF-43"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-43",
+        "energy": "ENERGY-WATER",
+        "extras": ["DF-81", "DF-43"]
+      },
+      "required_markers": ["ToolAttached("]
     }
   ]
 }
