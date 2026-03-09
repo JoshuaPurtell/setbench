@@ -9,12 +9,12 @@ Dragon Frontiers now has:
 - gold files copied from `setbench-engine-core`
 - a matching stub surface
 - a curriculum manifest for `0pct`, `30pct`, and `80pct`
-- an attack-focused public train slice
+- a public train replay slice aligned with the hidden event-log scenarios
 - broad hidden import-spec and runtime-hook coverage on top of the hidden event-log eval
 
-The public train surface is still intentionally narrower than the hidden suite. It focuses
-on deterministic attack/event-log behavior for a small set of DF attacks whose semantics
-live in `import_specs.rs` and `runtime.rs`.
+The public train surface now matches the hidden dynamic replay scenarios. Hidden eval
+still goes further by checking import-spec completeness and direct runtime-hook behavior
+that does not need to be agent-visible.
 
 The hidden suite now also checks:
 
@@ -26,6 +26,5 @@ The hidden suite now also checks:
 
 Remaining expansion work is:
 
-- broaden the visible train scenarios beyond the current attack-focused slice
 - add more dynamic power/trainer event-log scenarios, not just hook/unit coverage
 - tighten eventual export packaging for Terminal Bench
