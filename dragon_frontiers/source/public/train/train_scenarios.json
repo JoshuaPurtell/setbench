@@ -171,8 +171,25 @@
       "required_markers": ["StadiumPlayed("]
     },
     {
-      "name": "strength_charm_attach",
+      "name": "delta_circle_two_delta",
       "seed": 711,
+      "deck_p1": {
+        "deck_kind": "standard",
+        "primary": "DF-1",
+        "energy": "ENERGY-LIGHTNING",
+        "extras": ["DF-3", "DF-43"]
+      },
+      "deck_p2": {
+        "deck_kind": "standard",
+        "primary": "DF-1",
+        "energy": "ENERGY-LIGHTNING",
+        "extras": ["DF-3", "DF-43"]
+      },
+      "required_markers": ["Delta Circle", ",20)"]
+    },
+    {
+      "name": "strength_charm_attach",
+      "seed": 712,
       "deck_p1": {
         "deck_kind": "standard",
         "primary": "DF-3",

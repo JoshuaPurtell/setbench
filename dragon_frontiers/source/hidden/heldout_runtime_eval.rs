@@ -459,7 +459,14 @@ mod setbench_eventlog_eval {
         insert_meta(
             &mut map,
             "DF-1",
-            delta_pokemon_meta("Ampharos δ", vec![Type::Lightning], Stage::Stage2),
+            pokemon_meta_with_flags(
+                "Ampharos δ",
+                vec![Type::Lightning],
+                vec![attack_from_attack_mapping("1", "Delta Circle", Type::Lightning)],
+                Stage::Stage2,
+                false,
+                true,
+            ),
         );
         insert_meta(
             &mut map,
@@ -898,6 +905,10 @@ mod setbench_eventlog_eval {
                 attach_energy_to_active(game, current, current_energy.as_str(), 1);
                 attach_energy_to_active(game, opponent, opponent_energy.as_str(), 2);
             }
+            "delta_circle_two_delta" => {
+                force_active(game, opponent, "DF-43");
+                force_bench(game, current, "DF-3");
+            }
             "buffer_piece_attach" => {
                 force_active(game, opponent, "DF-43");
                 force_card_into_hand(game, current, "DF-72");
@@ -907,6 +918,13 @@ mod setbench_eventlog_eval {
                 force_active(game, opponent, "DF-43");
                 force_card_into_hand(game, current, "DF-74");
                 force_card_into_hand(game, opponent, "DF-74");
+            }
+            "old_rod_flip" => {
+                force_active(game, opponent, "DF-43");
+                force_card_into_hand(game, current, "DF-78");
+                force_card_into_hand(game, opponent, "DF-78");
+                let _ = move_card_to_discard(game, current, "DF-43");
+                let _ = move_card_to_discard(game, opponent, "DF-43");
             }
             "strength_charm_attach" => {
                 force_active(game, opponent, "DF-43");
@@ -1395,7 +1413,7 @@ mod setbench_eventlog_eval {
     #[test]
     fn setbench_eventlog_scenarios_are_defined() {
         let scenarios = scenario_specs();
-        assert_eq!(scenarios.len(), 11);
+        assert_eq!(scenarios.len(), 12);
     }
 
     #[test]
